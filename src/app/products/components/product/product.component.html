@@ -1,0 +1,18 @@
+<app-loading *ngIf="isLoading$ | async"></app-loading>
+<div *ngIf="(product$ |async) && !(isLoading$ |async)">
+    <div>
+        <div>
+            {{(product$ | async)?.name}}
+        </div>
+        <iframe srcdoc="{{(product$ | async)?.description}}"></iframe>
+        <div *ngFor="let image of (product$ | async)?.media.images">
+            <img src={{image.imageOriginalUrl}} width="160" height="160">
+        </div>
+        <div>
+            {{(product$ | async)?.defaultDisplayedPriceFormatted}}
+        </div>
+        <a [routerLink]="['/home']">
+            Come back
+        </a>
+    </div>
+</div>
