@@ -3,13 +3,17 @@ import { RouterModule, Routes } from "@angular/router";
 import { HomeComponent } from "./components/home.component";
 
 const routes: Routes = [
-    {
-        path: 'home',
-        component: HomeComponent
-    },
-    {
-      path: '',
-      component: HomeComponent
+  {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
+    path: '',
+    component: HomeComponent
+  },
+  {
+    path: 'home/tags/:categoryId',
+    component: HomeComponent
   }
 ];
 

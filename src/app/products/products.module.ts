@@ -10,19 +10,21 @@ import { ProductsRoutingModule } from "./products-routing.module";
 import { ProductComponent } from "./components/product/product.component";
 import { reducersProduct } from "./store/product/reducers";
 import { ProductEffect } from "./store/effects/product.effect";
+import { PaginationModule } from "../shared/modules/pagination/pagination.module";
 
 @NgModule({
+    declarations: [ProductsComponent, ProductComponent],
+    providers: [ProductsService],
+    exports: [ProductsComponent],
     imports: [
         CommonModule,
         ProductsRoutingModule,
         LoadingModule,
         EffectsModule.forFeature([ProductEffect]),
         StoreModule.forFeature('products', reducersProducts),
-        StoreModule.forFeature('product', reducersProduct)
-    ],
-    declarations: [ProductsComponent, ProductComponent],
-    providers: [ProductsService],
-    exports: [ProductsComponent]
+        StoreModule.forFeature('product', reducersProduct),
+        PaginationModule
+    ]
 })
 export class ProductsModule {
 

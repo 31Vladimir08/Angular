@@ -4,7 +4,9 @@ import { ProductsResponseInterface } from "../types/productsResponse.interface";
 
 export const getProductsAction = createAction(
     ProductsActionTypes.GET_PRODUCTS,
-    props<{offset: number}>()
+    props<{
+        url: string
+    }>()
 )
 
 export const getProductsSuccessAction = createAction(

@@ -14,4 +14,10 @@
             </a>
         </div>
     </div>
+    <app-pagination 
+        [total]="(products$ | async)?.count"
+        [limit]="limit"
+        [url]="baseUrl"
+        [currentPage]="currentPage"
+    ></app-pagination>
 </div>

@@ -9,8 +9,9 @@ import { environment } from "src/environments/environment";
 export class ProductsService {
 constructor(private http: HttpClient) {
 }
-    getProducts(offset: number): Observable<ProductsResponseInterface> {
-        const fullUrl = `${environment.apiUrl}/${environment.storeID}/products?limit=${environment.limit}&?offset=${offset}`
+    getProducts(url: string): Observable<ProductsResponseInterface> {
+        const fullUrl = environment.apiUrl + url
+        console.log(fullUrl)
         return this.http.get<ProductsResponseInterface>(fullUrl)
     }
 

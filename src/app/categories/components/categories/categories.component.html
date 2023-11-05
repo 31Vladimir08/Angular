@@ -1,11 +1,11 @@
 <app-loading *ngIf="isLoading$ | async"></app-loading>
 <div *ngIf="categories$ |async">
     <div *ngFor="let category of (categories$ | async)?.items">
-        <div>
+        <a [routerLink]="['/home/tags', category.id]" routerLinkActive="active">
             <img src={{category.imageUrl}} width="160" height="160">
             <div>
                 {{category.name}}
             </div>
-        </div>
+        </a>
     </div>
 </div>

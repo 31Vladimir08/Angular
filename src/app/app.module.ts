@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { Interceptor } from './shared/services/interceptor.service';
+import { HeaderModule } from './shared/modules/header/header.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { Interceptor } from './shared/services/interceptor.service';
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     HomeModule,
+    HeaderModule,
     HttpClientModule,
   ],
   providers: [

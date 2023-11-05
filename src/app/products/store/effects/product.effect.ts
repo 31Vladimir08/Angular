@@ -13,8 +13,8 @@ import { ProductResponseInterface } from "../../types/product.response.interfase
 export class ProductEffect {
     getProducts$ = createEffect(() => this.actions$.pipe(
         ofType(getProductsAction),
-        switchMap(({offset}) => {
-            return this.productService.getProducts(offset).pipe(
+        switchMap(({url}) => {
+            return this.productService.getProducts(url).pipe(
                 map((products: ProductsResponseInterface) => {
                     return getProductsSuccessAction({products})
                 }),
