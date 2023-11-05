@@ -9,7 +9,7 @@ import { LoadingModule } from "../shared/modules/loading/loading.module";
 import { ProductsRoutingModule } from "./products-routing.module";
 import { ProductComponent } from "./components/product/product.component";
 import { reducersProduct } from "./store/product/reducers";
-import { ProductEffect } from "./store/effects/getProducts.effect";
+import { ProductEffect } from "./store/effects/product.effect";
 
 @NgModule({
     imports: [

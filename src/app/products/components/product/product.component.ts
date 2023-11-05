@@ -31,6 +31,6 @@ export class ProductComponent implements OnInit {
     }
 
     getProduct(): void {
-        this.store.dispatch(getProductAction({id:this.id}));
+        this.store.dispatch(getProductAction({id: this.id}));
     }
 }

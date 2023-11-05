@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { ProductStateInterface } from "../../types/productState.interface copy";
+import { ProductStateInterface } from "../../types/productState.interface";
 
 export const productFeatureSelector = createFeatureSelector<
 ProductStateInterface>('product')

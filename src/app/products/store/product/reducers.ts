@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { ProductStateInterface } from "../../types/productState.interface copy";
+import { ProductStateInterface } from "../../types/productState.interface";
 import { getProductAction, getProductFailureAction, getProductSuccessAction } from "../../actions/getProduct.action";
 
 const initialState: ProductStateInterface = {

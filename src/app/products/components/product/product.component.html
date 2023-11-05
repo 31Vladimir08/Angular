@@ -5,7 +5,7 @@
             {{(product$ | async)?.name}}
         </div>
         <iframe srcdoc="{{(product$ | async)?.description}}"></iframe>
-        <div *ngFor="let image of (product$ | async)?.media.images">
+        <div *ngFor="let image of (product$ | async)?.media?.images">
             <img src={{image.imageOriginalUrl}} width="160" height="160">
         </div>
         <div>

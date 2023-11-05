@@ -6,12 +6,11 @@
             <div>
                 {{product.name}}
             </div>
-            <iframe srcdoc={{product.description}}></iframe>
             <div>
                 {{product.defaultDisplayedPriceFormatted}}
             </div>
             <a [routerLink]="['/products', product.id]">
-                Detail
+                Details
             </a>
         </div>
     </div>

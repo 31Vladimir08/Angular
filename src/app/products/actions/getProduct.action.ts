@@ -1,17 +1,17 @@
 import { createAction, props } from "@ngrx/store";
 import { ProductResponseInterface } from "../types/product.response.interfase";
-import { ActionTypes } from "../store/product/productType";
+import { ProductActionTypes } from "../store/product/productActionType";
 
 export const getProductAction = createAction(
-    ActionTypes.GET_PRODUCT,
+    ProductActionTypes.GET_PRODUCT,
     props<{id: number}>()
 )
 
 export const getProductSuccessAction = createAction(
-    ActionTypes.GET_PRODUCT_SUCCESS,
+    ProductActionTypes.GET_PRODUCT_SUCCESS,
     props<{product: ProductResponseInterface}>()
 )
 
 export const getProductFailureAction = createAction(
-    ActionTypes.GET_PRODUCT_FAILURE
+    ProductActionTypes.GET_PRODUCT_FAILURE
 )
