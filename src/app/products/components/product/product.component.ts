@@ -36,7 +36,6 @@ export class ProductComponent implements OnInit {
     }
 
     goBack() {
-        console.log('goBack')
         this.location.back();
       }
 }
