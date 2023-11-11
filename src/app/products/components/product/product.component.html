@@ -11,8 +11,6 @@
         <div>
             {{(product$ | async)?.defaultDisplayedPriceFormatted}}
         </div>
-        <a [routerLink]="['/home']">
-            Come back
-        </a>
+        <button (click)="goBack()">Come back</button>
     </div>
 </div>

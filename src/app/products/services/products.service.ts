@@ -11,7 +11,6 @@ constructor(private http: HttpClient) {
 }
     getProducts(url: string): Observable<ProductsResponseInterface> {
         const fullUrl = environment.apiUrl + url
-        console.log(fullUrl)
         return this.http.get<ProductsResponseInterface>(fullUrl)
     }
 

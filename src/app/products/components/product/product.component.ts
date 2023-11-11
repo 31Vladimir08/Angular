@@ -1,10 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Observable, switchMap } from "rxjs";
+import { Observable } from "rxjs";
 import { ProductResponseInterface } from "../../types/product.response.interfase";
 import { Store, select } from "@ngrx/store";
 import { getProductAction } from "../../actions/getProduct.action";
 import { errorSelector, isLoadingSelector, productSelector } from "../../store/product/selectors";
+import {Location} from '@angular/common';
 
 @Component({
     selector: 'app-product',
@@ -16,7 +17,7 @@ export class ProductComponent implements OnInit {
     isLoading$: Observable<boolean>
     error$: Observable<string | null>
     product$: Observable<ProductResponseInterface | null>
-    constructor(private activateRoute: ActivatedRoute, private store: Store){
+    constructor(private activateRoute: ActivatedRoute, private store: Store, private location: Location){
     }
     ngOnInit(): void {
         this.initValues()
@@ -33,4 +34,9 @@ export class ProductComponent implements OnInit {
     getProduct(): void {
         this.store.dispatch(getProductAction({id: this.id}));
     }
+
+    goBack() {
+        console.log('goBack')
+        this.location.back();
+      }
 }

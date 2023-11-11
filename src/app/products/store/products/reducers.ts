@@ -1,6 +1,7 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { ProductsStateInterface } from "../../types/productsState.interface";
 import { getProductsAction, getProductsFailureAction, getProductsSuccessAction } from "../../actions/getProducts.action";
+import { routerNavigatedAction } from "@ngrx/router-store";
 
 const initialState: ProductsStateInterface = {
     isLoading: false,
@@ -31,6 +32,10 @@ const productsReducer = createReducer(
             ...state,
             isLoading: false
         })
+    ),
+    on(
+        routerNavigatedAction,
+        ():  ProductsStateInterface => initialState
     )
 )
 

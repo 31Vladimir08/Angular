@@ -6,6 +6,7 @@ import { Observable, Subscription } from "rxjs";
 import { errorSelector, isLoadingSelector, productsSelector } from "../../store/products/selectors";
 import { environment } from "src/environments/environment";
 import { ActivatedRoute, Params, Router } from "@angular/router";
+import queryString from "query-string";
 
 
 @Component({
@@ -14,7 +15,8 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
     styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-    @Input('categoryId') categoryId: number | null
+    currentUrl: string
+    categoryId: number | null
     @Input('apiUrl') apiUrlProps: string
     isLoading$: Observable<boolean>
     error$: Observable<string | null>
@@ -27,7 +29,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     constructor(private store: Store, private router: Router, private route: ActivatedRoute) {        
     }
     ngOnDestroy(): void {
-        this.queryParamsSubscription.unsubscribe();
+        this.queryParamsSubscription?.unsubscribe();
     }
 
     ngOnInit(): void {
@@ -35,8 +37,20 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.inizializeListeners();
     }
     inizializeListeners() {
+        // для пагинации
         this.route.queryParams.subscribe((params: Params) => {
-            this.currentPage = Number(params['page'] || '1')
+            let currentPage = Number(params['page'] || '1')
+            if (this.currentPage !== currentPage) {
+                this.currentPage = currentPage
+                this.baseUrl = this.router.url.split('?')[0]
+                this.fetchData()
+            }
+        })
+
+        // для изменения категории
+        this.route.params.subscribe((params: Params) => {
+            this.categoryId = params['categoryId'] ?? null
+            this.baseUrl = this.router.url.split('?')[0]
             this.fetchData()
         })
     }
@@ -46,19 +60,28 @@ export class ProductsComponent implements OnInit, OnDestroy {
         this.error$ = this.store.pipe(select(errorSelector))
         this.products$ = this.store.pipe(select(productsSelector))
         this.baseUrl = this.router.url.split('?')[0]
-        console.log(this.baseUrl)
+        this.categoryId = Number(this.route.snapshot.paramMap.get('categoryId'))
     }
 
     fetchData(): void {
         const offset = this.currentPage * this.limit - this.limit
-        //const parsedUrl = parseUrl(this.apiUrlProps)
-        //const stringifiedParams = stringify({
-        //  limit: this.limit,
-        //  offset,
-        //  ...parsedUrl.query
-        //})
-        //const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`
-        //console.log(apiUrlWithParams)
-        this.store.dispatch(getProductsAction({url: `${this.apiUrlProps}/products`}));
+        const parsedUrl = queryString.parseUrl(this.apiUrlProps)
+        const stringifiedParams = this.categoryId == null || this.categoryId === 0 ? queryString.stringify({
+          limit: this.limit,
+          offset,
+          ...parsedUrl.query
+        })
+        : queryString.stringify({
+            limit: this.limit,
+            offset,
+            category: this.categoryId,
+            ...parsedUrl.query
+          })
+
+        const apiUrlWithParams = `${parsedUrl.url}/products?${stringifiedParams}`
+        if (this.currentUrl !== apiUrlWithParams) {
+            this.currentUrl = apiUrlWithParams
+            this.store.dispatch(getProductsAction({url: `${apiUrlWithParams}`}));
+        }
     }
 }

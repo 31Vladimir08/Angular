@@ -9,6 +9,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeModule } from './home/home.module';
 import { Interceptor } from './shared/services/interceptor.service';
 import { HeaderModule } from './shared/modules/header/header.module';
+import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { HeaderModule } from './shared/modules/header/header.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({router: routerReducer}),
+    StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([]),
     HomeModule,
     HeaderModule,

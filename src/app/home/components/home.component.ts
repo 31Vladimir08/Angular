@@ -1,6 +1,4 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from "@angular/core";
-import { ActivatedRoute, Params } from "@angular/router";
-import { Subscription } from "rxjs";
+import { Component } from "@angular/core";
 import { environment } from "src/environments/environment";
 
 @Component({

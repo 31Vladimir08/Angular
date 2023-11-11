@@ -12,7 +12,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'home/tags/:categoryId',
+    path: 'category/:categoryId',
     component: HomeComponent
   }
 ];
