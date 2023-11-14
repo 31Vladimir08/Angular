@@ -1,16 +1,24 @@
-<app-loading *ngIf="isLoading$ | async"></app-loading>
-<a [routerLink]="['/category', 0]" routerLinkActive="active">
-    <div>
-        Все категории
-    </div>
-</a>
-<div *ngIf="categories$ |async">
-    <div *ngFor="let category of (categories$ | async)?.items">
-        <a [routerLink]="['/category', category.id]" routerLinkActive="active">
-            <img src={{category.imageUrl}} width="160" height="160">
+<div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 150px; margin: 20px;">
+    <svg class="bi me-2" width="40" height="32">
+        <use xlink:href="#bootstrap"></use>
+    </svg>
+    <span class="fs-4">Категории</span>
+    <app-loading *ngIf="isLoading$ | async"></app-loading>
+    <div *ngIf="!(isLoading$ | async)" class="list-group list-group-flush border-bottom scrollarea">
+        <a class="list-group-item list-group-item-action py-3 lh-tight" [routerLink]="['/category', 0]" routerLinkActive="active">
             <div>
-                {{category.name}}
+                Все категории
             </div>
         </a>
+        <div *ngIf="categories$ |async">
+            <div *ngFor="let category of (categories$ | async)?.items">
+                <a class="list-group-item list-group-item-action py-3 lh-tight" [routerLink]="['/category', category.id]" routerLinkActive="active">
+                    <img src={{category.imageUrl}} width="60" height="50">
+                    <div>
+                        {{category.name}}
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
+  </div>
