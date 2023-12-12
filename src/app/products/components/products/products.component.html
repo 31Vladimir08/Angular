@@ -1,5 +1,5 @@
 <app-loading *ngIf="isLoading$ | async"></app-loading>
-<div *ngIf="products$ |async">
+<div *ngIf="products$ |async" style="margin: 20px;">
     <div *ngFor="let product of (products$ | async)?.items">
         <div>
             <img src={{product.smallThumbnailUrl}} width="160" height="160">
